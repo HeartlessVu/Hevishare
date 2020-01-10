@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="./Image/Logo/icon.png" type="image/x-icon">
+    <title>Hevi Share</title>
+
+</head>
+
+<body>
+    <script>
+        if (sessionStorage.Acces_Login === "Y") {
+            var t = prompt("Nhập Mã Truy Cập", '');
+            if (t === "170698") {
+                window.location.href = "./home.html";
+            }
+            else {
+                alert("Sai Mã Truy Cập");
+                //confirm("Trở về trang chủ :\n   - OK để trở về trang chủ\n  -Cancel để nhập lại mã", '');
+                sessionStorage.Count_f++;
+                if (sessionStorage.Count_f >= 3) {
+                    alert("Bạn nhập sai 3 lần, Bạn sẽ bị chuyển về trang chủ");
+                    window.location.href = "./index.html";
+                }
+                else {
+                    window.location.href = "./access.html";
+                }
+
+            }
+        }
+        else {
+            alert("Từ chối truy cập");
+            window.location.href = "./index.html";
+        }
+
+        //alert(t);
+
+    </script>
+</body>
+
+</html>

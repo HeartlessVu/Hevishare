@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
+  <link rel="shortcut icon" href="Image/Logo/icon.png" type="image/x-icon">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <title>Hevi Share</title>
+  <style>
+    @font-face {
+      font-family: Pacifico;
+      src: url('./font/Pacifico-Regular.ttf');
+    }
+
+    .navbar-brand {
+      font-family: Pacifico;
+    }
+  </style>
+</head>
+
+<body class="bg-secondary">
+  <div class="container">
+    <div class="row">
+      <nav class="col navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="javascript:void(0)">Hevi Share</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb"
+          aria-expanded="true">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse hide" id="navb">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0)">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0)">About me</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:window.scrollTo(0,document.body.scrollHeight)">Login</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="button">Search</button>
+          </form>
+        </div>
+      </nav>
+    </div>
+    <div id="carouselExampleSlidesOnly" class="row carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="Image/Banner-3.jpg" alt="First slide">
+        </div>
+      </div>
+    </div>
+    <div class="row p-lg-5 h-100 bg-light">
+      <div class="row col-lg-12 d-flex justify-content-center">
+        ​<picture>
+          <source srcset="Image/Logo/Logo.png" type="image/svg+xml">
+          <img src="Image/Logo/Logo.png" class="img-fluid" alt="...">
+        </picture>
+      </div>
+      <div class="row col-lg-12 d-flex justify-content-center">
+        <form class="col-5">
+          <div class="form-group">
+            <label for="exampleInputEmail1">User name</label>
+            <input type="text" class="form-control" id="exampleInputEmail1">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+          </div>
+          <button onclick="checklogin()" type="button" class="btn btn-primary col-12 form-check">
+            Đăng Nhập
+          </button>
+        </form>
+      </div>
+
+    </div>
+    <footer>
+      <div class="copyright row text-center h-auto bg-primary text-light pt-1 p-3 text-center">
+        Copyright &copy; 2017 <span>& Hevi Share</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    function checklogin() {
+      var user, password, remember;
+      user = document.getElementById("exampleInputEmail1").value;
+      password = document.getElementById("exampleInputPassword1").value;
+      if (user === "sa" && password === "123") {
+        sessionStorage.Acces_Login = "Y";
+        sessionStorage.Count_f = 0;
+        window.location.href = "./access.html";
+      }
+      else {
+        alert("Bạn không có quền truy cập: " + user + ' - ' + password);
+      }
+    }
+  </script>
+</body>
+
+</html>
