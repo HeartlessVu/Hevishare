@@ -28,12 +28,12 @@
 </head>
 
 <body>
-    <script>
+    <!-- <script>
         if (sessionStorage.Acces_Login != "Y") {
             confirm('Từ chối truy cập');
             window.location.href = "./index.html";
         }
-    </script>
+    </script> -->
     <div class="container mb-lg-5">
         <div class="row d-flex justify-content-center">
             ​<picture>
@@ -72,45 +72,22 @@
                 </div>
             </div>
         </div>
-        <div class="row d-flex justify-content-center">
-            <table class="table">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter2223</td>
-                    </tr>
-                </tbody>
-            </table>
-            <a data-flickr-embed="true" data-footer="true"
-                href="https://www.flickr.com/photos/stock-preset-vn/albums/72157712561536072" title="vd 7-1-2020"><img
-                    src="https://live.staticflickr.com/65535/49346430351_e4232bb798_z.jpg" width="480" height="640"
-                    alt="vd 7-1-2020"></a>
-            <script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+        <div id="imgView" class="row d-flex justify-content-center">
+
         </div>
     </div>
-
+    <script>
+        $.getJSON('./Image/pathimage.json', function (data) {
+            for (var index = 0; index < data.length; index++) {
+                var text = '';
+                text = `${data[index]}`;
+                var para = document.createElement("IMG");
+                para.src = text;
+                var element = document.getElementById("imgView");
+                element.appendChild(para);
+            }
+        });
+    </script>
 </body>
 
 
