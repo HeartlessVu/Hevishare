@@ -72,21 +72,65 @@
                 </div>
             </div>
         </div>
-        <div id="imgView" class="row d-flex justify-content-center">
+        <div id="imgView" class="row d-flex justify-content-center pt-3">
 
         </div>
+        <nav aria-label="col-12 Page navigation example" class="pt-3">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li onclick="removeElement" class="page-item"><a class="page-link" href="#">1</a></li>
+                <li onclick="removeElement" class="page-item"><a class="page-link" href="#">2</a></li>
+                <li onclick="removeElement" class="page-item"><a class="page-link" href="#">3</a></li>
+                <li onclick="removeElement" class="page-item"><a class="page-link" href="#">...</a></li>
+                <li onclick="removeElement" class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+        <footer id="footerbar" class="row bg-light pt-3">
+            <div class="col-12 copyright text-center h-auto bg-primary text-light p-3">
+                Copyright &copy; 2017 <span>& Hevi Share</span>
+            </div>
+        </footer>
     </div>
     <script>
         $.getJSON('./Image/pathimage.json', function (data) {
-            for (var index = 0; index < data.length; index++) {
-                var text = '';
-                text = `${data[index]}`;
-                var para = document.createElement("IMG");
-                para.src = text;
+            var datalength = data.length;
+            sessionStorage.Count = 0;
+            var count = sessionStorage.Count;
+            for (var i = 1; i <= 3; i++) {
+                var para = document.createElement("div");
+                if (i == 1 || i == 3) {
+                    para.className = "col p-0";
+                }
+                else {
+                    para.className = "col pl-1 pr-1";
+                }
+                para.id = "col-img-" + i;
                 var element = document.getElementById("imgView");
                 element.appendChild(para);
+                for (var index = count; index < count + 20 && index < datalength; index++) {
+                    var text = '';
+                    text = `${data[index]}`;
+                    para = document.createElement("IMG");
+                    para.src = text;
+                    para.alt = index + 1;
+                    para.className = "img-fluid w-100 mt-1 mb-1 ml-0 mr-0";
+                    element = document.getElementById("col-img-" + i);
+                    element.appendChild(para);
+                }
+                count = index;
             }
+
         });
+
+        function removeElement(elementId) {
+            // Removes an element from the document
+            var element = document.getElementById(elementId);
+            element.parentNode.removeChild(element);
+        };
     </script>
 </body>
 
