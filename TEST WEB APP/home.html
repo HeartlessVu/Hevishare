@@ -76,16 +76,22 @@
 
         </div>
         <nav aria-label="col-12 Page navigation example" class="pt-3">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+            <ul id="pagination-bar" class="pagination justify-content-center">
+                <li id="prev-page" class="page-item disabled">
+                    <a class="page-link" href="javascript:loadPages('prev')" tabindex="-1">Previous</a>
                 </li>
-                <li onclick="removeElement" class="page-item"><a class="page-link" href="#">1</a></li>
-                <li onclick="removeElement" class="page-item"><a class="page-link" href="#">2</a></li>
-                <li onclick="removeElement" class="page-item"><a class="page-link" href="#">3</a></li>
-                <li onclick="removeElement" class="page-item"><a class="page-link" href="#">...</a></li>
-                <li onclick="removeElement" class="page-item">
-                    <a class="page-link" href="#">Next</a>
+
+                <li id="page-item-1" class="page-item disabled"><a id="page-link-1"
+                        class="page-link bg-primary text-light" href="javascript:loadPages(1)">1</a></li>
+                <li id="page-item-2" class="page-item"><a id="page-link-2" class="page-link"
+                        href="javascript:loadPages(2)">2</a></li>
+                <li id="page-item-3" class="page-item"><a id="page-link-3" class="page-link"
+                        href="javascript:loadPages(3)">3</a></li>
+                <li id="page-mor" class="page-item"><a id="page-link-mor" class="page-link"
+                        href="javascript:loadPages(mor)">...</a>
+                </li>
+                <li id="next-page" class="page-item">
+                    <a class="page-link" href="javascript:loadPages('next')">Next</a>
                 </li>
             </ul>
         </nav>
@@ -96,37 +102,168 @@
         </footer>
     </div>
     <script>
-        $.getJSON('./Image/pathimage.json', function (data) {
-            var datalength = data.length;
-            sessionStorage.Count = 0;
-            var count = sessionStorage.Count;
-            for (var i = 1; i <= 3; i++) {
-                var para = document.createElement("div");
-                if (i == 1 || i == 3) {
-                    para.className = "col p-0";
+        sessionStorage.maxPage = 3;
+        sessionStorage.maxImgId = 0;
+        loadPage(1);
+
+
+
+        function loadPage(PageID) {
+            $.getJSON('./Image/pathimage.json', function (data) {
+                var datalength = data.length;
+                sessionStorage.datalength = datalength;
+                if (datalength % 60 != 0) {
+                    sessionStorage.countPage = (datalength / 60 | 0) + 1;
+                } else {
+                    sessionStorage.countPage = datalength / 60;
                 }
-                else {
-                    para.className = "col pl-1 pr-1";
-                }
-                para.id = "col-img-" + i;
-                var element = document.getElementById("imgView");
-                element.appendChild(para);
-                for (var index = count; index < count + 20 && index < datalength; index++) {
-                    var text = '';
-                    text = `${data[index]}`;
-                    para = document.createElement("IMG");
-                    para.src = text;
-                    para.alt = index + 1;
-                    para.className = "img-fluid w-100 mt-1 mb-1 ml-0 mr-0";
-                    element = document.getElementById("col-img-" + i);
+                var count = (parseInt(PageID) - 1) * 60;
+                for (var i = 1; i <= 3; i++) {
+                    var para = document.createElement("div");
+                    if (i == 1 || i == 3) {
+                        para.className = "col p-0";
+                    }
+                    else {
+                        para.className = "col pl-1 pr-1";
+                    }
+                    //para.id = "col-img-" + i + " col-img";  
+                    para.id = "col-img-" + i;
+                    var element = document.getElementById("imgView");
                     element.appendChild(para);
+                    //var text = "";
+                    for (var index = count; index >= count && index < parseInt(count) + 20 && index <= datalength; index++) {
+                        var text = '';
+                        text = `${data[index]}`;
+                        para = document.createElement("IMG");
+                        para.src = text;
+                        para.alt = (index) + "," + "," + (parseInt(count) + 20);
+                        para.className = "img-fluid w-100 mt-1 mb-1 ml-0 mr-0";
+                        element = document.getElementById("col-img-" + i);
+                        element.appendChild(para);
+
+                        //text = text + "<br>" + index;
+                    }
+                    count = index;
+                    // document.write(text);
                 }
-                count = index;
+
+                // var pgae_item = document.createElement("li");
+                // pgae_item.onclick = "javascript:removeElement('"+"";
+                // var html = '<input type="file" name="uploaded_files[]" /> ' +
+                //     '<a href="" onclick="javascript:removeElement('file-' + fileId + ''); return false;">Remove</a>';
+                // addElement('files', 'p', 'file-' + fileId, html);
+            });
+        };
+
+        function loadPages(PageID) {
+            // Removes an element from the document
+            //confirm(PageID);
+            window.scrollTo(0, 0);
+            for (var j = 1; j <= 3; j++) {
+                var img_id = "col-img-" + j;
+                var element = document.getElementById(img_id);
+                element.parentNode.removeChild(element);
+                // confirm(img_id);
+            };
+            if (PageID < sessionStorage.countPage) {
+                for (var k = parseInt(sessionStorage.maxPage) - 2; k <= parseInt(sessionStorage.maxPage); k++) {
+                    var page_id = "page-item-" + k;
+                    var element = document.getElementById(page_id);
+
+                    element.parentNode.removeChild(element);
+                };
+
+                var element = document.getElementById("page-mor");
+                element.parentNode.removeChild(element);
+                element = document.getElementById("next-page");
+                element.parentNode.removeChild(element);
+
+                sessionStorage.maxPage = PageID;
+                var para;
+                for (var m = parseInt(sessionStorage.maxPage); m <= parseInt(sessionStorage.maxPage) + 2 && m <= parseInt(sessionStorage.countPage); m++) {
+                    //sessionStorage.maxPage = m;
+                    var page_id = "page-item-" + m;
+                    para = document.createElement("li");
+                    para.id = page_id;
+                    para.className = "page-item";
+                    element = document.getElementById("pagination-bar");
+                    element.appendChild(para);
+                    var link_id = "page-link-" + m;
+                    para = document.createElement("a");
+                    para.id = link_id;
+                    para.className = "page-link";
+                    para.href = "javascript:loadPages(" + m + ")";
+                    para.innerHTML = m;
+                    element = document.getElementById(page_id);
+                    element.appendChild(para);
+
+
+                };
+
+                para = document.createElement("li");
+                para.id = "page-mor";
+                para.className = "page-item";
+                element = document.getElementById("pagination-bar");
+                element.appendChild(para);
+                para = document.createElement("a");
+                para.className = "page-link";
+                para.href = "javascript:loadPages('mor')";
+                para.innerHTML = ". . .";
+                element = document.getElementById("page-mor");
+                element.appendChild(para);
+
+                para = document.createElement("li");
+                para.id = "next-page";
+                para.className = "page-item";
+                element = document.getElementById("pagination-bar");
+                element.appendChild(para);
+                para = document.createElement("a");
+                para.className = "page-link";
+                para.href = "javascript:loadPages('next')";
+                para.innerHTML = "Next";
+                element = document.getElementById("next-page");
+                element.appendChild(para);
+
+                sessionStorage.maxPage = parseInt(m) - 1;
+            }
+            else {
+                var element = document.getElementById("page-mor");
+                element.parentNode.removeChild(element);
+
             }
 
-        });
+
+
+
+            loadPage(PageID);
+            document.getElementById("page-item-" + PageID).className = 'page-item disabled';
+            document.getElementById("page-link-" + PageID).className = 'page-link bg-primary text-light';
+
+            if (PageID >= sessionStorage.countPage) {
+                document.getElementById("next-page").className = 'page-item disabled';
+                document.getElementById("prev-page").className = 'page-item';
+                document.getElementById("page-item-" + (parseInt(sessionStorage.countPage) - 1)).className = 'page-item';
+                document.getElementById("page-link-" + (parseInt(sessionStorage.countPage) - 1)).className = 'page-lick bg-light';
+            } else {
+                if (PageID <= 2) {
+                    document.getElementById("prev-page").className = 'page-item disabled';
+                    document.getElementById("next-page").className = 'page-item';
+                }
+                else {
+                    document.getElementById("prev-page").className = 'page-item';
+                    document.getElementById("next-page").className = 'page-item';
+                }
+            }
+
+
+        };
 
         function removeElement(elementId) {
+            // Removes an element from the document
+            var element = document.getElementById(elementId);
+            element.parentNode.removeChild(element);
+        };
+        function loadMorPages(elementId) {
             // Removes an element from the document
             var element = document.getElementById(elementId);
             element.parentNode.removeChild(element);
