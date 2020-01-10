@@ -25,8 +25,8 @@
 
 <body class="bg-secondary">
   <div class="container">
-    <div class="row">
-      <nav class="col navbar navbar-expand-lg navbar-dark bg-primary">
+    <div id="navbar" class="row">
+      <nav class="col-12 navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="javascript:void(0)">Hevi Share</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb"
           aria-expanded="true">
@@ -55,19 +55,16 @@
     <div id="carouselExampleSlidesOnly" class="row carousel slide" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="Image/Banner-3.jpg" alt="First slide">
+          <img class="img-fluid" src=" Image/Banner-3.jpg" alt="First slide">
         </div>
       </div>
     </div>
-    <div class="row p-lg-5 h-100 bg-light">
-      <div class="row col-lg-12 d-flex justify-content-center">
-        ​<picture>
-          <source srcset="Image/Logo/Logo.png" type="image/svg+xml">
-          <img src="Image/Logo/Logo.png" class="img-fluid" alt="...">
-        </picture>
+    <div id="contentbd" class="row  bg-light">
+      <div class="col-12">
+        <img src="Image/Logo/Logo.png" class="img-fluid mx-auto d-block" alt="...">
       </div>
-      <div class="row col-lg-12 d-flex justify-content-center">
-        <form class="col-5">
+      <div class="col-12 d-flex justify-content-center">
+        <form class="col-12">
           <div class="form-group">
             <label for="exampleInputEmail1">User name</label>
             <input type="text" class="form-control" id="exampleInputEmail1">
@@ -87,7 +84,7 @@
       </div>
 
     </div>
-    <footer class="row bg-light pt-3">
+    <footer id="footerbar" class="row bg-light pt-3">
       <div class="col-12 copyright text-center h-auto bg-primary text-light p-3">
         Copyright &copy; 2017 <span>& Hevi Share</span>
       </div>
@@ -108,6 +105,12 @@
         alert("Bạn không có quền truy cập: " + user + ' - ' + password);
       }
     }
+
+    document.getElementById("contentbd").style.minHeight =
+      window.innerHeight -
+      (document.getElementById("navbar").scrollHeight +
+        document.getElementById("carouselExampleSlidesOnly").scrollHeight +
+        document.getElementById("footerbar").scrollHeight) + "px";
   </script>
 </body>
 
