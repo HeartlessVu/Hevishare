@@ -7,13 +7,45 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="./Image/Logo/icon.png" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <!-- <link rel="import" href="index.html"> -->
+    <script>
+        var AVGLE_CATEGORIES_API_URL = 'https://api.avgle.com/v1/categories';
+        $.getJSON(AVGLE_CATEGORIES_API_URL, function (response) {
+            console.log(response);
+            if (response.success) {
+                var categories = response.response.categories;
+                for (var i = 0; i < categories.length; i++) {
+                    var text = '';
+                    text = categories[i].name;
+                    para = document.createElement("div");
+                    //para.innerHTML = text;
+                    para.id = 'category-' + i;
+                    para.className = 'col-3 border border-secondary';
+                    element = document.getElementById("load");
+                    element.appendChild(para);
+                    element = document.getElementById;
+                    para2 = document.createElement("p");
+                    para2.innerHTML = text;
+                    para2.className = 'text-light';
+                    element = document.getElementById('category-' + i);
+                    element.appendChild(para2)
+                }
+                //document.write(categories[0].name);
+            }
+        })
+    </script>
 </head>
 
 <body>
-    <embed src="https://www.flickr.com/" style="width:500px; height: 300px;">
-    <iframe width="420" height="345" src="https://www.w3schools.com/">
-    </iframe>
+    <div class="container bg-primary">
+        <div class="row" id="load">
+
+        </div>
+    </div>
 </body>
 
 </html>

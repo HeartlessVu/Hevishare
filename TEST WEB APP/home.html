@@ -51,11 +51,21 @@
 
                 <div class="navbar-collapse collapse hide" id="navb">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="javascript:void(0)">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="javascript:void(0)">About me</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Avgle
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Videos</a>
+                                <a class="dropdown-item" href="#">Categories</a>
+                            </div>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
@@ -122,8 +132,7 @@
                     var para = document.createElement("div");
                     if (i == 1 || i == 3) {
                         para.className = "col p-0";
-                    }
-                    else {
+                    } else {
                         para.className = "col pl-1 pr-1";
                     }
                     //para.id = "col-img-" + i + " col-img";  
@@ -131,7 +140,8 @@
                     var element = document.getElementById("imgView");
                     element.appendChild(para);
                     //var text = "";
-                    for (var index = count; index >= count && index < parseInt(count) + 20 && index <= datalength; index++) {
+                    for (var index = count; index >= count && index < parseInt(count) + 20 && index <=
+                        datalength; index++) {
                         var text = '';
                         text = `${data[index]}`;
                         para = document.createElement("IMG");
@@ -180,7 +190,8 @@
 
                 sessionStorage.maxPage = PageID;
                 var para;
-                for (var m = parseInt(sessionStorage.maxPage); m <= parseInt(sessionStorage.maxPage) + 2 && m <= parseInt(sessionStorage.countPage); m++) {
+                for (var m = parseInt(sessionStorage.maxPage); m <= parseInt(sessionStorage.maxPage) + 2 && m <=
+                    parseInt(sessionStorage.countPage); m++) {
                     //sessionStorage.maxPage = m;
                     var page_id = "page-item-" + m;
                     para = document.createElement("li");
@@ -225,8 +236,7 @@
                 element.appendChild(para);
 
                 sessionStorage.maxPage = parseInt(m) - 1;
-            }
-            else {
+            } else {
                 var element = document.getElementById("page-mor");
                 element.parentNode.removeChild(element);
 
@@ -242,14 +252,15 @@
             if (PageID >= sessionStorage.countPage) {
                 document.getElementById("next-page").className = 'page-item disabled';
                 document.getElementById("prev-page").className = 'page-item';
-                document.getElementById("page-item-" + (parseInt(sessionStorage.countPage) - 1)).className = 'page-item';
-                document.getElementById("page-link-" + (parseInt(sessionStorage.countPage) - 1)).className = 'page-lick bg-light';
+                document.getElementById("page-item-" + (parseInt(sessionStorage.countPage) - 1)).className =
+                'page-item';
+                document.getElementById("page-link-" + (parseInt(sessionStorage.countPage) - 1)).className =
+                    'page-lick bg-light';
             } else {
                 if (PageID <= 2) {
                     document.getElementById("prev-page").className = 'page-item disabled';
                     document.getElementById("next-page").className = 'page-item';
-                }
-                else {
+                } else {
                     document.getElementById("prev-page").className = 'page-item';
                     document.getElementById("next-page").className = 'page-item';
                 }
@@ -263,6 +274,7 @@
             var element = document.getElementById(elementId);
             element.parentNode.removeChild(element);
         };
+
         function loadMorPages(elementId) {
             // Removes an element from the document
             var element = document.getElementById(elementId);
