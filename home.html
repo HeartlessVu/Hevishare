@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="./Image/Logo/icon.png" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <title>Hevi Share</title>
+    <style>
+        @font-face {
+            font-family: Pacifico;
+            src: url('./font/Pacifico-Regular.ttf');
+        }
+
+        .navbar-brand {
+            font-family: Pacifico;
+        }
+
+        .nav-item {
+            font-family: inherit;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <script>
+        if (sessionStorage.Acces_Login != "Y") {
+            confirm('Từ chối truy cập');
+            window.location.href = "./index.html";
+        }
+    </script> -->
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            ​<picture>
+                <source srcset="Image/Logo/Logo.png" type="image/svg+xml">
+                <img src="Image/Logo/Logo.png" class="img-fluid" alt="...">
+            </picture>
+        </div>
+        <div class="row">
+            <nav class="col navbar navbar-expand-lg navbar-dark bg-primary">
+                <a class="navbar-brand" href="javascript:void(0)">Hevi Share</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navb" aria-expanded="true">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse hide" id="navb">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="javascript:void(0)">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)">About me</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Avgle
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Videos</a>
+                                <a class="dropdown-item" href="#">Categories</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                        <button class="btn btn-outline-light my-2 my-sm-0" type="button">Search</button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+        <div id="carouselExampleSlidesOnly" class="row carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="Image/Banner-3.jpg" alt="First slide">
+                </div>
+            </div>
+        </div>
+        <div id="imgView" class="row d-flex justify-content-center pt-3">
+
+        </div>
+        <nav aria-label="col-12 Page navigation example" class="pt-3">
+            <ul id="pagination-bar" class="pagination justify-content-center">
+                <li id="prev-page" class="page-item disabled">
+                    <a class="page-link" href="javascript:loadPages('prev')" tabindex="-1">Previous</a>
+                </li>
+
+                <li id="page-item-1" class="page-item disabled"><a id="page-link-1"
+                        class="page-link bg-primary text-light" href="javascript:loadPages(1)">1</a></li>
+                <li id="page-item-2" class="page-item"><a id="page-link-2" class="page-link"
+                        href="javascript:loadPages(2)">2</a></li>
+                <li id="page-item-3" class="page-item"><a id="page-link-3" class="page-link"
+                        href="javascript:loadPages(3)">3</a></li>
+                <li id="page-mor" class="page-item"><a id="page-link-mor" class="page-link"
+                        href="javascript:loadPages(mor)">...</a>
+                </li>
+                <li id="next-page" class="page-item">
+                    <a class="page-link" href="javascript:loadPages('next')">Next</a>
+                </li>
+            </ul>
+        </nav>
+        <footer id="footerbar" class="row bg-light pt-3">
+            <div class="col-12 copyright text-center h-auto bg-primary text-light p-3">
+                Copyright &copy; 2017 <span>& Hevi Share</span>
+            </div>
+        </footer>
+    </div>
+    <script>
+        sessionStorage.maxPage = 3;
+        sessionStorage.maxImgId = 0;
+        loadPage(1);
+
+
+
+        function loadPage(PageID) {
+            $.getJSON('./Image/pathimage.json', function (data) {
+                var datalength = data.length;
+                sessionStorage.datalength = datalength;
+                if (datalength % 60 != 0) {
+                    sessionStorage.countPage = (datalength / 60 | 0) + 1;
+                } else {
+                    sessionStorage.countPage = datalength / 60;
+                }
+                var count = (parseInt(PageID) - 1) * 60;
+                for (var i = 1; i <= 3; i++) {
+                    var para = document.createElement("div");
+                    if (i == 1 || i == 3) {
+                        para.className = "col p-0";
+                    } else {
+                        para.className = "col pl-1 pr-1";
+                    }
+                    //para.id = "col-img-" + i + " col-img";  
+                    para.id = "col-img-" + i;
+                    var element = document.getElementById("imgView");
+                    element.appendChild(para);
+                    //var text = "";
+                    for (var index = count; index >= count && index < parseInt(count) + 20 && index <=
+                        datalength; index++) {
+                        var text = '';
+                        text = `${data[index]}`;
+                        para = document.createElement("IMG");
+                        para.src = text;
+                        para.alt = (index) + "," + "," + (parseInt(count) + 20);
+                        para.className = "img-fluid w-100 mt-1 mb-1 ml-0 mr-0";
+                        element = document.getElementById("col-img-" + i);
+                        element.appendChild(para);
+
+                        //text = text + "<br>" + index;
+                    }
+                    count = index;
+                    // document.write(text);
+                }
+
+                // var pgae_item = document.createElement("li");
+                // pgae_item.onclick = "javascript:removeElement('"+"";
+                // var html = '<input type="file" name="uploaded_files[]" /> ' +
+                //     '<a href="" onclick="javascript:removeElement('file-' + fileId + ''); return false;">Remove</a>';
+                // addElement('files', 'p', 'file-' + fileId, html);
+            });
+        };
+
+        function loadPages(PageID) {
+            // Removes an element from the document
+            //confirm(PageID);
+            window.scrollTo(0, 0);
+            for (var j = 1; j <= 3; j++) {
+                var img_id = "col-img-" + j;
+                var element = document.getElementById(img_id);
+                element.parentNode.removeChild(element);
+                // confirm(img_id);
+            };
+            if (PageID < sessionStorage.countPage) {
+                for (var k = parseInt(sessionStorage.maxPage) - 2; k <= parseInt(sessionStorage.maxPage); k++) {
+                    var page_id = "page-item-" + k;
+                    var element = document.getElementById(page_id);
+
+                    element.parentNode.removeChild(element);
+                };
+
+                var element = document.getElementById("page-mor");
+                element.parentNode.removeChild(element);
+                element = document.getElementById("next-page");
+                element.parentNode.removeChild(element);
+
+                sessionStorage.maxPage = PageID;
+                var para;
+                for (var m = parseInt(sessionStorage.maxPage); m <= parseInt(sessionStorage.maxPage) + 2 && m <=
+                    parseInt(sessionStorage.countPage); m++) {
+                    //sessionStorage.maxPage = m;
+                    var page_id = "page-item-" + m;
+                    para = document.createElement("li");
+                    para.id = page_id;
+                    para.className = "page-item";
+                    element = document.getElementById("pagination-bar");
+                    element.appendChild(para);
+                    var link_id = "page-link-" + m;
+                    para = document.createElement("a");
+                    para.id = link_id;
+                    para.className = "page-link";
+                    para.href = "javascript:loadPages(" + m + ")";
+                    para.innerHTML = m;
+                    element = document.getElementById(page_id);
+                    element.appendChild(para);
+
+
+                };
+
+                para = document.createElement("li");
+                para.id = "page-mor";
+                para.className = "page-item";
+                element = document.getElementById("pagination-bar");
+                element.appendChild(para);
+                para = document.createElement("a");
+                para.className = "page-link";
+                para.href = "javascript:loadPages('mor')";
+                para.innerHTML = ". . .";
+                element = document.getElementById("page-mor");
+                element.appendChild(para);
+
+                para = document.createElement("li");
+                para.id = "next-page";
+                para.className = "page-item";
+                element = document.getElementById("pagination-bar");
+                element.appendChild(para);
+                para = document.createElement("a");
+                para.className = "page-link";
+                para.href = "javascript:loadPages('next')";
+                para.innerHTML = "Next";
+                element = document.getElementById("next-page");
+                element.appendChild(para);
+
+                sessionStorage.maxPage = parseInt(m) - 1;
+            } else {
+                var element = document.getElementById("page-mor");
+                element.parentNode.removeChild(element);
+
+            }
+
+
+
+
+            loadPage(PageID);
+            document.getElementById("page-item-" + PageID).className = 'page-item disabled';
+            document.getElementById("page-link-" + PageID).className = 'page-link bg-primary text-light';
+
+            if (PageID >= sessionStorage.countPage) {
+                document.getElementById("next-page").className = 'page-item disabled';
+                document.getElementById("prev-page").className = 'page-item';
+                document.getElementById("page-item-" + (parseInt(sessionStorage.countPage) - 1)).className =
+                'page-item';
+                document.getElementById("page-link-" + (parseInt(sessionStorage.countPage) - 1)).className =
+                    'page-lick bg-light';
+            } else {
+                if (PageID <= 2) {
+                    document.getElementById("prev-page").className = 'page-item disabled';
+                    document.getElementById("next-page").className = 'page-item';
+                } else {
+                    document.getElementById("prev-page").className = 'page-item';
+                    document.getElementById("next-page").className = 'page-item';
+                }
+            }
+
+
+        };
+
+        function removeElement(elementId) {
+            // Removes an element from the document
+            var element = document.getElementById(elementId);
+            element.parentNode.removeChild(element);
+        };
+
+        function loadMorPages(elementId) {
+            // Removes an element from the document
+            var element = document.getElementById(elementId);
+            element.parentNode.removeChild(element);
+        };
+    </script>
+</body>
+
+
+</html>
