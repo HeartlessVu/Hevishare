@@ -12,20 +12,79 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+    <style>
+        @font-face {
+            font-family: Pacifico;
+            src: url('./font/Pacifico-Regular.ttf');
+        }
 
+        .navbar-brand {
+            font-family: Pacifico;
+        }
+
+        .nav-item {
+            font-family: inherit;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
+        <div class="row d-flex justify-content-center">
+            ​<picture>
+                <source srcset="Image/Logo/Logo.png" type="image/svg+xml">
+                <img src="Image/Logo/Logo.png" class="img-fluid" alt="...">
+            </picture>
+        </div>
+        <div class="row">
+            <nav class="col navbar navbar-expand-lg navbar-dark bg-primary">
+                <a class="navbar-brand" href="javascript:void(0)">Hevi Share</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navb" aria-expanded="true">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse hide" id="navb">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="javascript:void(0)">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)">About me</a>
+                        </li>
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Avgle
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Videos</a>
+                                <a class="dropdown-item" href="#">Categories</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                        <button class="btn btn-outline-light my-2 my-sm-0" type="button">Search</button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+        <div id="carouselExampleSlidesOnly" class="row carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="Image/Banner-3.jpg" alt="First slide">
+                </div>
+            </div>
+        </div>
         <div class="row" id="loadmd">
 
         </div>
-        <div class="row">
-            ​<picture>
-                <source srcset="https://avgle.com/media/categories/video/1.jpg" type="image/svg+xml">
-                <img src="" class=" img-fluid img-thumbnail" alt="...">
-            </picture>
-        </div>
+        <footer id="footerbar" class="row bg-light pt-3">
+            <div class="col-12 copyright text-center h-auto bg-primary text-light p-3">
+                Copyright &copy; 2017 <span>& Hevi Share</span>
+            </div>
+        </footer>
     </div>
     <script>
         var AVGLE_CATEGORIES_API_URL = 'https://api.avgle.com/v1/categories';
