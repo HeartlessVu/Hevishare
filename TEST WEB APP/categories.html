@@ -12,28 +12,45 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" id="loadmd">
+
+        </div>
+    </div>
     <script>
         var AVGLE_CATEGORIES_API_URL = 'https://api.avgle.com/v1/categories';
         $.getJSON(AVGLE_CATEGORIES_API_URL, function (response) {
             console.log(response);
             if (response.success) {
                 var categories = response.response.categories;
-                for(var i;i<categories.length;i++){
-                    para=document.createElement("div");
-                    para.className = "col-3"
-                    element = document.getElementById("");
+                var elements = document.getElementById("loadmd");
+                var para;
+                for (var i = 0; i < categories.length; i++) {
+                    para = document.createElement("DIV");
+                    para.className = "col-3";
+                    para.id = "categorie-" + categories[i].CHID;
+                    elements.appendChild(para);
+                    ////
+                    para2 = document.createElement("IMG");
+                    para2.className = "";
+                    para2.src = categories[i].cover_url;
+                    elements2 = document.getElementById("categorie-" + categories[i].CHID);
+                    elements2.appendChild(para2);
+                    // // --------------------------------------------
+                    // var para2 = document.createElement("P");
+                    // para2.className = "";
+                    // para2.innerHTML = collections[i].title;
+                    // elements.appendChild(para2);
+                    // // --------------------------------------------
+
                 };
             }
         })
     </script>
-</head>
-
-<body>
-    <div class="container bg-info">
-        <div class="row" id="loadmd">
-
-        </div>
-    </div>
 </body>
 
 </html>
