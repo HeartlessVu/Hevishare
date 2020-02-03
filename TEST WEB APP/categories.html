@@ -20,6 +20,12 @@
         <div class="row" id="loadmd">
 
         </div>
+        <div class="row">
+            ​<picture>
+                <source srcset="https://avgle.com/media/categories/video/1.jpg" type="image/svg+xml">
+                <img src="" class=" img-fluid img-thumbnail" alt="...">
+            </picture>
+        </div>
     </div>
     <script>
         var AVGLE_CATEGORIES_API_URL = 'https://api.avgle.com/v1/categories';
@@ -30,21 +36,24 @@
                 var elements = document.getElementById("loadmd");
                 var para;
                 for (var i = 0; i < categories.length; i++) {
+                    var url = "";
                     para = document.createElement("DIV");
                     para.className = "col-3";
                     para.id = "categorie-" + categories[i].CHID;
                     elements.appendChild(para);
                     ////
                     para2 = document.createElement("IMG");
-                    para2.className = "";
-                    para2.src = categories[i].cover_url;
+                    para2.className = "rounded mx-auto d-block w-100";
+                    //url = categories[i].cover_url;
+                    para2.src = "https://static-clst.avgle.com/" + categories[i].cover_url.substring(24,
+                        categories[i].cover_url.lengthlength);
                     elements2 = document.getElementById("categorie-" + categories[i].CHID);
                     elements2.appendChild(para2);
                     // // --------------------------------------------
-                    // var para2 = document.createElement("P");
-                    // para2.className = "";
-                    // para2.innerHTML = collections[i].title;
-                    // elements.appendChild(para2);
+                    var para2 = document.createElement("P");
+                    para2.className = "";
+                    para2.innerHTML = categories[i].name;
+                    elements2.appendChild(para2);
                     // // --------------------------------------------
 
                 };
