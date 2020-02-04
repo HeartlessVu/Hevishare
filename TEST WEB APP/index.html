@@ -14,6 +14,20 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
   <title>Hevi Share</title>
+  <script>
+    function checklogin() {
+      var user, password;
+      user = document.getElementById("exampleInputEmail1").value;
+      password = document.getElementById("exampleInputPassword1").value;
+      if (user === "sa" && password === "123") {
+        sessionStorage.Acces_Login = "Y";
+        sessionStorage.Count_f = 0;
+        window.location = "./home.html";
+      } else {
+        alert("Bạn không có quền truy cập: " + user + ' - ' + password);
+      }
+    }
+  </script>
   <style>
     @font-face {
       font-family: Pacifico;
@@ -50,7 +64,7 @@
           </div>
 
           <div class="container-login100-form-btn">
-            <button class="login100-form-btn btn-primary" onclick="checklogin()">
+            <button class="login100-form-btn btn-primary" type="button" onclick="checklogin()">
               Login
             </button>
           </div>
@@ -58,20 +72,7 @@
       </div>
     </div>
   </div>
-  <script>
-    function checklogin() {
-      var user, password;
-      user = document.getElementById("exampleInputEmail1").value;
-      password = document.getElementById("exampleInputPassword1").value;
-      if (user === "sa" && password === "123") {
-        sessionStorage.Acces_Login = "Y";
-        sessionStorage.Count_f = 0;
-        window.location.href = "./home.html";
-      } else {
-        alert("Bạn không có quền truy cập: " + user + ' - ' + password);
-      }
-    }
-  </script>
+
 </body>
 
 </html>
