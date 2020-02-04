@@ -11,7 +11,71 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        function loadmd() {
+            var AVGLE_CATEGORIES_API_URL = 'https://api.avgle.com/v1/categories';
+            $.getJSON(AVGLE_CATEGORIES_API_URL, function (response) {
+                console.log(response);
+                if (response.success) {
+                    var categories = response.response.categories;
+                    var elements = document.getElementById("loadmd");
+                    var para;
+                    for (var i = 0; i < categories.length; i++) {
+                        var url = "";
+                        para = document.createElement("DIV");
+                        para.className = "col-3";
+                        para.id = "categorie-" + categories[i].CHID;
+                        elements.appendChild(para);
+                        ////
+                        para2 = document.createElement("IMG");
+                        para2.className = "rounded mx-auto d-block w-100";
+                        para2.type = 'jpg'
+                        //para2.src = categories[i].cover_url
+                        para2.src = "https://static-clst.avgle.com/" + categories[i].cover_url.substring(24,
+                            categories[i].cover_url.length);
+                        elements2 = document.getElementById("categorie-" + categories[i].CHID);
+                        elements2.appendChild(para2);
+                        // // --------------------------------------------
+                        var para2 = document.createElement("a");
+                        para2.className = "";
+                        para2.href = categories[i].category_url;
+                        para2.innerHTML = categories[i].name;
+                        elements2.appendChild(para2);
+                        // // --------------------------------------------
+                    };
+                    // $("#ifrmavg").remove();
+                    // //
+                    // elements = document.getElementById("loadmd");
+                    // for (var i = 0; i < categories.length; i++) {
+                    //     var url = "";
+                    //     para = document.createElement("DIV");
+                    //     para.className = "col-3";
+                    //     para.id = "categorie-" + categories[i].CHID;
+                    //     elements.appendChild(para);
+                    //     ////
+                    //     para2 = document.createElement("IMG");
+                    //     para2.className = "rounded mx-auto d-block w-100";
+                    //     para2.type = 'jpg'
+                    //     //para2.src = categories[i].cover_url
+                    //     para2.src = "https://static-clst.avgle.com/" + categories[i].cover_url.substring(24,
+                    //         categories[i].cover_url.length);
+                    //     elements2 = document.getElementById("categorie-" + categories[i].CHID);
+                    //     elements2.appendChild(para2);
+                    //     // // --------------------------------------------
+                    //     var para2 = document.createElement("a");
+                    //     para2.className = "";
+                    //     para2.href = categories[i].category_url;
+                    //     para2.innerHTML = categories[i].name;
+                    //     elements2.appendChild(para2);
+                    //     // // --------------------------------------------
 
+                    // };
+                }
+            })
+        }
+
+       
+    </script>
     <style>
         @font-face {
             font-family: Pacifico;
@@ -29,6 +93,7 @@
 </head>
 
 <body>
+    <iframe onload="loadmd()" id="ifrmavg" src="https://avgle.com/categories" width="100%" height="100"></iframe>
     <div class="container">
         <div class="row d-flex justify-content-center">
             ​<picture>
@@ -77,48 +142,17 @@
                 </div>
             </div>
         </div>
-        <div class="row" id="loadmd">
+        <div class="row pt-1" id="loadmd">
 
         </div>
+
         <footer id="footerbar" class="row bg-light pt-3">
             <div class="col-12 copyright text-center h-auto bg-primary text-light p-3">
                 Copyright &copy; 2017 <span>& Hevi Share</span>
             </div>
         </footer>
     </div>
-    <script>
-        var AVGLE_CATEGORIES_API_URL = 'https://api.avgle.com/v1/categories';
-        $.getJSON(AVGLE_CATEGORIES_API_URL, function (response) {
-            console.log(response);
-            if (response.success) {
-                var categories = response.response.categories;
-                var elements = document.getElementById("loadmd");
-                var para;
-                for (var i = 0; i < categories.length; i++) {
-                    var url = "";
-                    para = document.createElement("DIV");
-                    para.className = "col-3";
-                    para.id = "categorie-" + categories[i].CHID;
-                    elements.appendChild(para);
-                    ////
-                    para2 = document.createElement("IMG");
-                    para2.className = "rounded mx-auto d-block w-100";
-                    //url = categories[i].cover_url;
-                    para2.src = "https://static-clst.avgle.com/" + categories[i].cover_url.substring(24,
-                        categories[i].cover_url.lengthlength);
-                    elements2 = document.getElementById("categorie-" + categories[i].CHID);
-                    elements2.appendChild(para2);
-                    // // --------------------------------------------
-                    var para2 = document.createElement("P");
-                    para2.className = "";
-                    para2.innerHTML = categories[i].name;
-                    elements2.appendChild(para2);
-                    // // --------------------------------------------
 
-                };
-            }
-        })
-    </script>
 </body>
 
 </html>
